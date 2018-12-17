@@ -1,0 +1,97 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ClosableTabItemControl">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ClosableTabItemControl;component/Styles/CloseButtonStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="TabItemFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle
+                        Margin="3,3,3,1"
+                        SnapsToDevicePixels="true"
+                        Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                        StrokeDashArray="1 2"
+                        StrokeThickness="1" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94" />
+    <LinearGradientBrush x:Key="ButtonNormalBackground" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#F3F3F3" />
+        <GradientStop Offset="0.5" Color="#EBEBEB" />
+        <GradientStop Offset="0.5" Color="#DDDDDD" />
+        <GradientStop Offset="1" Color="#CDCDCD" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TabItemHotBackground" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0.15" Color="#EAF6FD" />
+        <GradientStop Offset=".5" Color="#D9F0FC" />
+        <GradientStop Offset=".5" Color="#BEE6FD" />
+        <GradientStop Offset="1" Color="#A7D9F5" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="TabItemSelectedBackground" Color="#F9F9F9" />
+    <SolidColorBrush x:Key="TabItemHotBorderBrush" Color="#3C7FB1" />
+    <SolidColorBrush x:Key="TabItemDisabledBackground" Color="#F4F4F4" />
+    <SolidColorBrush x:Key="TabItemDisabledBorderBrush" Color="#FFC9C7BA" />
+
+    <Style BasedOn="{StaticResource {x:Type TabItem}}" TargetType="{x:Type local:ClosableTabItem}">
+        <Setter Property="Background" Value="Black" />
+        <Setter Property="Foreground" Value="#f5dfb5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ClosableTabItem}">
+                    <Grid SnapsToDevicePixels="true">
+                        <Border
+                            x:Name="Bd"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Gray"
+                            BorderThickness="0,0,2,0">
+                            <StackPanel Orientation="Horizontal">
+                                <ContentPresenter
+                                    x:Name="Content"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    ContentSource="Header"
+                                    RecognizesAccessKey="True"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <Button
+                                    x:Name="closeButton"
+                                    Width="8"
+                                    Height="8"
+                                    Margin="17,3,-1,0"
+                                    VerticalContentAlignment="Center"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ClosableTabItem}}, Path=CloseTabItemCommand}"
+                                    Style="{StaticResource CloseButtonStyle}"
+                                    Visibility="Hidden" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" Value="#fff9eb" />
+                            <Setter TargetName="closeButton" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Panel.ZIndex" Value="1" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="Foreground" Value="#fbf2e1" />
+                            <!--  #ed5aa0  -->
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource TabItemDisabledBackground}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource TabItemDisabledBorderBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

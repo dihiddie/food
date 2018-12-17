@@ -1,0 +1,17 @@
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\bin\Debug\ClosableTabItemTest.exe.config
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\bin\Debug\ClosableTabItemTest.exe
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\bin\Debug\ClosableTabItemTest.pdb
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\bin\Debug\ClosableTabItemControl.dll
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\bin\Debug\ClosableTabItemControl.pdb
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\ClosableTabItemTest.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\MainWindow.baml
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\MainWindow.g.cs
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\App.g.cs
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\ClosableTabItemTest_MarkupCompile.cache
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\ClosableTabItemTest.g.resources
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\ClosableTabItemTest.Properties.Resources.resources
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\ClosableTabItemTest.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\ClosableTabItemTest.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\ClosableTabItemTest.csproj.CopyComplete
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\ClosableTabItemTest.exe
+C:\Users\User\Desktop\Staff\Food\ClosableTabItemTest\obj\Debug\ClosableTabItemTest.pdb

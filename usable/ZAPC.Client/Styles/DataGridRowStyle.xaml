@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AdvancedDataGridControl.Models;assembly=AdvancedDataGridControl">
+
+    <Style x:Key="DataGridRowStyle" TargetType="{x:Type DataGridRow}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                <Setter Property="Background" Value="#BFBFBF" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                <Setter Property="Background" Value="White" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsDisabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                <Setter Property="IsEnabled" Value="False" />
+            </DataTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#F2F2F2" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

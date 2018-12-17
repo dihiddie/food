@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<ED101 Sum="2500000" Priority="3" TransKind="01" SystemCode="01" EDNo="6" EDDate="14.04.2003" EDAuthor="4525545000" xmlns="urn:cbr-ru:ed:v2.0">
+  <Payer PersonalAcc="40702810300160000000" KPP="771801001" INN="7718130078">
+    <Name>ЗАО "КОРВЕТ"</Name>
+    <Bank BIC="044525545" CorrespAcc="30101810300000000545" />
+  </Payer>
+  <Payee PersonalAcc="40201810100080100000" KPP="0" INN="7718112070">
+    <Name>ФИНАНСОВОЕ УПРАВЛЕНИЕ ВАО Г МОСКВЫ (ДЛЯ ИМНС N 18 ПО ВАО Г МОСКВЫ)</Name>
+    <Bank BIC="044583001" CorrespAcc="30110200000000001024" />
+  </Payee>
+  <Purpose>НДС за март 2003</Purpose>
+  <DepartmentalInfo DrawerStatus="1" CBC="18210301000010000110" OKATO="45263591000" PaytReason="ТП" TaxPeriod="МС.03.2003" DocNo="0" DocDate="07.04.2003" TaxPaytKind="НС" />
+</ED101>

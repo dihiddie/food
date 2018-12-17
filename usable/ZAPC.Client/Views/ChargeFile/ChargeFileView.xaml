@@ -1,0 +1,338 @@
+﻿<Window
+    x:Class="ZAPC.Client.Views.ChargeFile.ChargeFileView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:clearableDatePicker="clr-namespace:ClearableDatePicker;assembly=ClearableDatePicker"
+    xmlns:converters="clr-namespace:ZAPC.Client.Essentials.Converters;assembly=ZAPC.Client.Essentials"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:documents="http://icl.ru/zapc/documents"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:ZAPC.Client.Resources"
+    xmlns:viewModels="clr-namespace:ZAPC.Client.ViewModels"
+    xmlns:zapc="http://icl.ru/zapc/client/essentials"
+    x:Name="ChargeFile"
+    MinWidth="{Binding Path=Width, ElementName=ChargeFile}"
+    MaxWidth="{Binding Path=Width, ElementName=ChargeFile}"
+    SizeToContent="Width"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <viewModels:ControlViewModel x:Key="ClosingControlViewModel" />
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <converters:TitleConverter x:Key="TitleConverter" />
+        <Style TargetType="{x:Type StackPanel}">
+            <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
+        <Style
+            x:Key="LocalDefaultLabelStyle"
+            BasedOn="{StaticResource DefaultLabelStyle}"
+            TargetType="{x:Type Label}">
+            <Setter Property="Width" Value="250" />
+        </Style>
+        <Style
+            x:Key="SmallComboBoxStyle"
+            BasedOn="{StaticResource ChargeComboBoxStyle}"
+            TargetType="{x:Type ComboBox}">
+            <Setter Property="zapc:Ex.CustomWidth" Value="150" />
+        </Style>
+        <Style
+            x:Key="BigComboBoxStyle"
+            BasedOn="{StaticResource ChargeComboBoxStyle}"
+            TargetType="{x:Type ComboBox}">
+            <Setter Property="zapc:Ex.CustomWidth" Value="385" />
+        </Style>
+        <Style
+            x:Key="SmallTextBoxStyle"
+            BasedOn="{StaticResource DefaultTextBoxStyle}"
+            TargetType="{x:Type TextBox}">
+            <Setter Property="zapc:Ex.CustomWidth" Value="150" />
+        </Style>
+        <Style
+            x:Key="BigTextBoxStyle"
+            BasedOn="{StaticResource DefaultTextBoxStyle}"
+            TargetType="{x:Type TextBox}">
+            <Setter Property="zapc:Ex.CustomWidth" Value="385" />
+        </Style>
+        <Style BasedOn="{StaticResource ClearableDatePickerStyle}" TargetType="{x:Type clearableDatePicker:ClearableDatePicker}">
+            <Setter Property="zapc:Ex.CustomWidth" Value="150" />
+        </Style>
+    </Window.Resources>
+    <Window.Title>
+        <MultiBinding Converter="{StaticResource TitleConverter}">
+            <Binding Path="FileName" />
+            <Binding Path="TextDescriptionOfMode" />
+        </MultiBinding>
+    </Window.Title>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Separator Grid.Row="0" BorderBrush="#D6E0E5" />
+        <ScrollViewer
+            Grid.Row="1"
+            HorizontalScrollBarVisibility="Hidden"
+            VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Content="{zapc:Description Type={x:Type documents:Ed101}}"
+                    Style="{DynamicResource HeaderLabelStyle}" />
+                <StackPanel Grid.Row="1">
+                    <Label Content="{zapc:Description PropertyName=PaytKind, Type={x:Type documents:Ed101}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <ComboBox
+                        IsEnabled="{Binding IsEnabled}"
+                        ItemsSource="{x:Static documents:PaytKind.Items}"
+                        SelectedItem="{zapc:CustomBinding Path=Model.PaytKind}"
+                        Style="{DynamicResource BigComboBoxStyle}" />
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <Label Content="{zapc:Description PropertyName=Amount, Type={x:Type documents:Ed101}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Amount}" />
+                </StackPanel>
+                <StackPanel Grid.Row="3">
+                    <Label Content="{zapc:Description PropertyName=Purpose, Type={x:Type documents:Ed101}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Purpose}" />
+                </StackPanel>
+                <StackPanel Grid.Row="4">
+                    <Label Content="{zapc:Description PropertyName=Priority, Type={x:Type documents:Ed101}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <ComboBox
+                        IsEnabled="{Binding IsEnabled}"
+                        ItemsSource="{x:Static documents:Priority.Items}"
+                        SelectedItem="{zapc:CustomBinding Path=Model.Priority}"
+                        Style="{DynamicResource SmallComboBoxStyle}" />
+                </StackPanel>
+                <StackPanel Grid.Row="5">
+                    <Label Content="{zapc:Description PropertyName=SystemCode, Type={x:Type documents:Ed101}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <ComboBox
+                        x:Name="SystemCodes"
+                        ItemsSource="{Binding Path=Items, Source={x:Static documents:SystemCode.Instance}}"
+                        SelectedItem="{zapc:CustomBinding Path=Model.SystemCode}">
+                        <ComboBox.Style>
+                            <Style BasedOn="{StaticResource SmallComboBoxStyle}" TargetType="{x:Type ComboBox}">
+                                <Style.Setters>
+                                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+                                </Style.Setters>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=Model.PaytKind.Code}" Value="4">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ComboBox.Style>
+                    </ComboBox>
+                </StackPanel>
+                <Label
+                    Grid.Row="6"
+                    Content="{zapc:Description PropertyName=Payer,
+                                               Type={x:Type documents:Ed101}}"
+                    Style="{DynamicResource HeaderLabelStyle}" />
+                <StackPanel Grid.Row="7">
+                    <Label Content="{zapc:Description PropertyName=Inn, Type={x:Type documents:PaymentMember}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payer.Inn}" />
+                </StackPanel>
+                <StackPanel Grid.Row="8">
+                    <Label Content="{zapc:Description PropertyName=Kpp, Type={x:Type documents:PaymentMember}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payer.Kpp}" />
+                </StackPanel>
+                <StackPanel Grid.Row="9">
+                    <Label Content="{zapc:Description PropertyName=Name, Type={x:Type documents:PaymentMember}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payer.Name}" />
+                </StackPanel>
+                <StackPanel Grid.Row="10">
+                    <Label Content="{zapc:Description PropertyName=AccountNumber, Type={x:Type documents:PaymentMember}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payer.AccountNumber}" />
+                </StackPanel>
+                <StackPanel Grid.Row="11">
+                    <Label Content="{zapc:Description PropertyName=Bic, Type={x:Type documents:Bank}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payer.Bank.Bic}" />
+                </StackPanel>
+                <StackPanel Grid.Row="12">
+                    <Label Content="{zapc:Description PropertyName=AccountNumber, Type={x:Type documents:Bank}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payer.Bank.AccountNumber}" />
+                </StackPanel>
+                <Label
+                    Grid.Row="13"
+                    Content="{zapc:Description PropertyName=Payee,
+                                               Type={x:Type documents:Ed101}}"
+                    Style="{DynamicResource HeaderLabelStyle}" />
+                <StackPanel Grid.Row="14">
+                    <Label Content="{zapc:Description PropertyName=Inn, Type={x:Type documents:PaymentMember}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payee.Inn}" />
+                </StackPanel>
+                <StackPanel Grid.Row="15">
+                    <Label Content="{zapc:Description PropertyName=Kpp, Type={x:Type documents:PaymentMember}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payee.Kpp}" />
+                </StackPanel>
+                <StackPanel Grid.Row="16">
+                    <Label Content="{zapc:Description PropertyName=Name, Type={x:Type documents:PaymentMember}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payee.Name}" />
+                </StackPanel>
+                <StackPanel Grid.Row="17">
+                    <Label Content="{zapc:Description PropertyName=AccountNumber, Type={x:Type documents:PaymentMember}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payee.AccountNumber}" />
+                </StackPanel>
+                <StackPanel Grid.Row="18">
+                    <Label Content="{zapc:Description PropertyName=Bic, Type={x:Type documents:Bank}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payee.Bank.Bic}" />
+                </StackPanel>
+                <StackPanel Grid.Row="19">
+                    <Label Content="{zapc:Description PropertyName=AccountNumber, Type={x:Type documents:Bank}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource BigTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.Payee.Bank.AccountNumber}" />
+                </StackPanel>
+                <Label
+                    Grid.Row="20"
+                    Content="{zapc:Description PropertyName=DepartmentalInfo,
+                                               Type={x:Type documents:Ed101}}"
+                    Style="{DynamicResource HeaderLabelStyle}" />
+                <StackPanel Grid.Row="21">
+                    <Label Content="{zapc:Description PropertyName=DrawerStatus, Type={x:Type documents:DepartmentalInfo}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource SmallTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.DepartmentalInfo.DrawerStatus}" />
+                </StackPanel>
+                <StackPanel Grid.Row="22">
+                    <Label Content="{zapc:Description PropertyName=Cbc, Type={x:Type documents:DepartmentalInfo}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource SmallTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.DepartmentalInfo.Cbc}" />
+                </StackPanel>
+                <StackPanel Grid.Row="23">
+                    <Label Content="{zapc:Description PropertyName=Okato, Type={x:Type documents:DepartmentalInfo}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource SmallTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.DepartmentalInfo.Okato}" />
+                </StackPanel>
+                <StackPanel Grid.Row="24">
+                    <Label Content="{zapc:Description PropertyName=PaytReason, Type={x:Type documents:DepartmentalInfo}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource SmallTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.DepartmentalInfo.PaytReason}" />
+                </StackPanel>
+                <StackPanel Grid.Row="25">
+                    <Label Content="{zapc:Description PropertyName=TaxPeriod, Type={x:Type documents:DepartmentalInfo}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource SmallTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.DepartmentalInfo.TaxPeriod}" />
+                </StackPanel>
+                <StackPanel Grid.Row="26">
+                    <Label Content="{zapc:Description PropertyName=DocNo, Type={x:Type documents:DepartmentalInfo}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource SmallTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.DepartmentalInfo.DocNo}" />
+                </StackPanel>
+                <StackPanel Grid.Row="27">
+                    <Label Content="{zapc:Description PropertyName=DocDate, Type={x:Type documents:DepartmentalInfo}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <clearableDatePicker:ClearableDatePicker IsEnabled="{Binding IsEnabled}" SelectedDate="{zapc:CustomBinding Path=Model.DepartmentalInfo.DocDate}" />
+                </StackPanel>
+                <StackPanel Grid.Row="28" Margin="0,0,0,10">
+                    <Label Content="{zapc:Description PropertyName=TaxPaytKind, Type={x:Type documents:DepartmentalInfo}}" Style="{DynamicResource LocalDefaultLabelStyle}" />
+                    <TextBox
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{DynamicResource SmallTextBoxStyle}"
+                        Text="{zapc:CustomBinding Path=Model.DepartmentalInfo.TaxPaytKind}" />
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+        <Separator Grid.Row="2" BorderBrush="#D6E0E5" />
+        <StackPanel
+            Grid.Row="3"
+            Margin="0,15,15,15"
+            HorizontalAlignment="Right">
+            <Button
+                Command="{Binding SendDocumentToServerCommandAsync}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                Content="{x:Static resources:SharedResources.OkCaption}"
+                Visibility="{Binding DataContext.IsEnabled, Converter={StaticResource BoolToVis}, ElementName=ChargeFile}" />
+            <Button
+                Margin="0"
+                Command="{Binding CloseWithDialogResultFalseCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                Content="{x:Static resources:SharedResources.CloseCaption}"
+                DataContext="{StaticResource ClosingControlViewModel}" />
+        </StackPanel>
+    </Grid>
+</Window>

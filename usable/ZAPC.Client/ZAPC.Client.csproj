@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BCFD087F-E067-4DEA-BB59-C01885E9BB25}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ZAPC.Client</RootNamespace>
+    <AssemblyName>ZAPC.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controllers\CryptoProController\ContainerPasswordController.cs" />
+    <Compile Include="Controllers\CryptoProController\ICryptoProController.cs" />
+    <Compile Include="Controllers\EDAuthor\ISelectEdAuthorController.cs" />
+    <Compile Include="Controllers\ShowDocInfoController.cs" />
+    <Compile Include="Controllers\ShowDocument\IShowDocumentsController.cs" />
+    <Compile Include="Controllers\ShowDocument\ShowDocumentsController.cs" />
+    <Compile Include="Controllers\ShowFileInfo\ICheckerController.cs" />
+    <Compile Include="Controllers\ShowFileInfo\ICreatorController.cs" />
+    <Compile Include="Controllers\ShowFileInfo\IEditorController.cs" />
+    <Compile Include="Controllers\ShowFileInfo\IShowFileInfoController.cs" />
+    <Compile Include="Controllers\ShowFileInfo\ShowUfebsFileInfoController.cs" />
+    <Compile Include="Controllers\ShowFileInfo\ChargeFileController.cs" />
+    <Compile Include="Controls\ChargeInfoGrid.xaml.cs">
+      <DependentUpon>ChargeInfoGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListOfFiles.xaml.cs">
+      <DependentUpon>ListOfFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OtherDocumentsGrid.xaml.cs">
+      <DependentUpon>OtherDocumentsGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BoolOrMultiValueConverter.cs" />
+    <Compile Include="Converters\IsStringNotEmptyConverter.cs" />
+    <Compile Include="Converters\StringToTextDocumentConverter.cs" />
+    <Compile Include="Converters\ValidationErrorTemplateWidthConverter.cs" />
+    <Compile Include="Resources\SharedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SharedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ChargeFile\ChargeFileViewModel.cs" />
+    <Compile Include="Resources\TabResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TabResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CreateEdDocViewModel.cs" />
+    <Compile Include="ViewModels\ChargeFile\CheckChargeFileViewModel.cs" />
+    <Compile Include="ViewModels\CryptoProInitialization\CryptoProInitializationViewModel.cs" />
+    <Compile Include="ViewModels\ChargeListOfFiles\ChargeListOfFilesViewModel.cs" />
+    <Compile Include="ViewModels\ControlViewModel.cs" />
+    <Compile Include="ViewModels\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\ED301\Ed301ViewModel.cs" />
+    <Compile Include="ViewModels\IAutoUpdatable.cs" />
+    <Compile Include="ViewModels\ListOfDocumentsViewModel.cs" />
+    <Compile Include="ViewModels\ED210\Ed210ViewModel.cs" />
+    <Compile Include="ViewModels\ED499\Ed499ViewModel.cs" />
+    <Compile Include="ViewModels\ED202\Ed202ViewModel.cs" />
+    <Compile Include="ViewModels\ED421\Ed421ViewModel.cs" />
+    <Compile Include="ViewModels\ED204\Ed204ViewModel.cs" />
+    <Compile Include="ViewModels\ED203\Ed203ViewModel.cs" />
+    <Compile Include="ViewModels\ListOfFilesBaseViewModel.cs" />
+    <Compile Include="ViewModels\OtherDocsListOfFile\OtherDocsListOfFilesViewModel.cs" />
+    <Compile Include="ViewModels\SelectEDAuthor\SelectEdAuthorViewModel.cs" />
+    <Compile Include="ViewModels\ListOfFiles\ListOfFilesOfPacketEpdViewModel.cs" />
+    <Compile Include="ViewModels\ShowDocumentsViewModel.cs" />
+    <Compile Include="ViewModels\TabControlContainerViewModel.cs" />
+    <Compile Include="ViewModels\UfebsFile\UfebsFileViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\ChargeFile\ChargeFileView.xaml.cs">
+      <DependentUpon>ChargeFileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContainerPassword\ContainerPasswordView_IPasswordStorage.xaml.cs" />
+    <Compile Include="Views\ContainerPassword\ContainerPasswordView.xaml.cs">
+      <DependentUpon>ContainerPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChargeListOfFiles\ChargeListOfFilesView.xaml.cs">
+      <DependentUpon>ChargeListOfFilesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ED499\Ed499View.xaml.cs">
+      <DependentUpon>Ed499View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ED301\Ed301View.xaml.cs">
+      <DependentUpon>Ed301View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ED210\Ed210View.xaml.cs">
+      <DependentUpon>Ed210View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ED202\ED202View.xaml.cs">
+      <DependentUpon>ED202View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ED421\Ed421View.xaml.cs">
+      <DependentUpon>Ed421View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ED204\Ed204View.xaml.cs">
+      <DependentUpon>Ed204View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ED203\Ed203View.xaml.cs">
+      <DependentUpon>Ed203View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectEDAuthor\SelectEdAuthorView.xaml.cs">
+      <DependentUpon>SelectEdAuthorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectEDAuthor\SelectEdAuthorView_SelectEdAuthorController.cs" />
+    <Compile Include="Views\UfebsFile\UfebsFileView.xaml.cs">
+      <DependentUpon>UfebsFileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PacketEpdListOfFiles\PacketEpdListOfFilesView.xaml.cs">
+      <DependentUpon>PacketEpdListOfFilesView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\ChargeInfoGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ListOfFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Controls\OtherDocumentsGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\AdvancedDataGridStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ChargeComboBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\DataGridCellStatusColorStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DataGridCellTemplateTextBlockStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DataGridStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DataGridCellStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DataGridRowStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\LabelStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\SharedFontStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TabItemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ClearableDatePickerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TextBlockStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ValidationFailedTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ChargeFile\ChargeFileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContainerPassword\ContainerPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChargeListOfFiles\ChargeListOfFilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ED499\Ed499View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ED301\Ed301View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ED210\Ed210View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ED202\ED202View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ED421\Ed421View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ED204\Ed204View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ED203\Ed203View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectEDAuthor\SelectEdAuthorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UfebsFile\UfebsFileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PacketEpdListOfFiles\PacketEpdListOfFilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SharedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SharedResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\TabResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TabResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\PasswordStorage\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClearableDatePicker\ClearableDatePickerControls.csproj">
+      <Project>{17EC4D77-6C34-41FF-8C27-D3ABCA2CA099}</Project>
+      <Name>ClearableDatePickerControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Icl.Mvvm.Async\Icl.Mvvm.Async.csproj">
+      <Project>{65C09927-7306-4E0A-A28B-D9C6307363A7}</Project>
+      <Name>Icl.Mvvm.Async</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdvancedDataGridControl\AdvancedDataGridControl.csproj">
+      <Project>{35fa1102-cf3c-4a19-8a59-a424c0153459}</Project>
+      <Name>AdvancedDataGridControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CheckboxableComboboxControl\CheckboxableComboboxControl.csproj">
+      <Project>{a97f269f-82ae-41d0-a836-f3f80d78952b}</Project>
+      <Name>CheckboxableComboboxControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZAPC.BikWorker\ZAPC.BikWorker.csproj">
+      <Project>{8204634B-3132-42D2-9548-84267E278E7A}</Project>
+      <Name>ZAPC.BikWorker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZAPC.Client.Essentials\ZAPC.Client.Essentials.csproj">
+      <Project>{C4BA0C12-F4F6-46A1-A464-7CD75881FB3D}</Project>
+      <Name>ZAPC.Client.Essentials</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZAPC.Client.ServerObject\ZAPC.Client.ServerObject.csproj">
+      <Project>{6756771F-8C95-47E4-BC02-013E3E1B7CB6}</Project>
+      <Name>ZAPC.Client.ServerObject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZAPC.Core\ZAPC.Core.csproj">
+      <Project>{93324C88-9A28-4CF0-A1B2-DC2489CDAFE3}</Project>
+      <Name>ZAPC.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZAPC.CspClient.CryptoPro\ZAPC.CspClient.CryptoPro.csproj">
+      <Project>{2E601668-A54A-46D6-9708-85193E86E837}</Project>
+      <Name>ZAPC.CspClient.CryptoPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZAPC.CustomControls.Core\ZAPC.CustomControls.Core.csproj">
+      <Project>{03be4b8d-5ddd-4b74-8601-f6bce267b1da}</Project>
+      <Name>ZAPC.CustomControls.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZAPC.Documents\ZAPC.Documents.csproj">
+      <Project>{61AAC3AC-7AA4-40B5-9503-A4AB092860DE}</Project>
+      <Name>ZAPC.Documents</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\invalid.png" />
+    <Resource Include="Icons\schedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icon_attention.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icon_attention26.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

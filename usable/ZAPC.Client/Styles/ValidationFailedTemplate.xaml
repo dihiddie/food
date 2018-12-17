@@ -1,0 +1,93 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate x:Key="ValidationFailed">
+        <!--<Border
+            Margin="0,-5"
+            BorderBrush="#E2574C"
+            BorderThickness="1"
+            SnapsToDevicePixels="True">
+            <Grid>
+                <ToggleButton
+                    Name="ToggleButton"
+                    HorizontalAlignment="Right"
+                    Focusable="False">
+                    <ToggleButton.Template>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Polygon
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Fill="Red"
+                                Points="9,9 9,0 0,0"
+                                Stroke="Red"
+                                StrokeThickness="1" />
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                </ToggleButton>
+
+
+                <AdornedElementPlaceholder x:Name="valAdorner" />
+                <Popup
+                    Name="Popup"
+                    AllowsTransparency="True"
+                    Focusable="False"
+                    IsOpen="{Binding ElementName=ToggleButton, Path=IsChecked}"
+                    Placement="Bottom"
+                    PlacementTarget="{Binding ElementName=Placeholder}"
+                    PopupAnimation="Slide"
+                    StaysOpen="False">
+                    <Grid Background="Red" Focusable="False">
+                        <TextBlock Focusable="False" Text="{Binding ElementName=valAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+                    </Grid>
+                </Popup>
+            </Grid>
+        </Border>-->
+        <StackPanel Orientation="Horizontal">
+            <Border
+                Margin="0,-5"
+                BorderBrush="#E2574C"
+                BorderThickness="1"
+                SnapsToDevicePixels="True">
+                <StackPanel Orientation="Horizontal">
+
+                    <Border
+                        Margin="-1,-1"
+                        BorderBrush="#E2574C"
+                        BorderThickness="1"
+                        SnapsToDevicePixels="True">
+                        <ToggleButton
+                            Name="ToggleButton"
+                            HorizontalAlignment="Right"
+                            Focusable="False">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Image
+                                        Name="ErrorImage"
+                                        Width="26"
+                                        Height="26"
+                                        Margin="1"
+                                        Focusable="False"
+                                        RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                        RenderOptions.EdgeMode="Aliased"
+                                        Source="pack://application:,,,/Icons/icon_attention26.png" />
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                    </Border>
+                    <Popup
+                        Name="Popup"
+                        AllowsTransparency="True"
+                        Focusable="False"
+                        IsOpen="{Binding ElementName=ToggleButton, Path=IsChecked}"
+                        Placement="Bottom"
+                        PlacementTarget="{Binding ElementName=Placeholder}"
+                        PopupAnimation="Slide"
+                        StaysOpen="False">
+                        <Grid Background="Red" Focusable="False">
+                            <TextBlock Focusable="False" Text="{Binding ElementName=Placeholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+                        </Grid>
+                    </Popup>
+                    <AdornedElementPlaceholder x:Name="Placeholder" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ControlTemplate>
+</ResourceDictionary>

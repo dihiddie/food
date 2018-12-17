@@ -1,0 +1,6 @@
+C:\Users\User\Desktop\Staff\Food\Food.Client.Essentials\bin\Debug\Food.Client.Essentials.dll
+C:\Users\User\Desktop\Staff\Food\Food.Client.Essentials\bin\Debug\Food.Client.Essentials.pdb
+C:\Users\User\Desktop\Staff\Food\Food.Client.Essentials\obj\Debug\Food.Client.Essentials.dll
+C:\Users\User\Desktop\Staff\Food\Food.Client.Essentials\obj\Debug\Food.Client.Essentials.pdb
+C:\Users\User\Desktop\Staff\Food\Food.Client.Essentials\obj\Debug\Food.Client.Essentials.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Staff\Food\Food.Client.Essentials\obj\Debug\Food.Client.Essentials.csprojAssemblyReference.cache

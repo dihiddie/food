@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <RadialGradientBrush x:Key="Main.Background" GradientOrigin="0.5,0.5">
+        <GradientStop Offset="0" Color="LightBlue" />
+        <GradientStop Offset="0.6" Color="LightPink" />
+    </RadialGradientBrush>
+    <SolidColorBrush x:Key="Title.Foreground" Color="Purple" />
+    <SolidColorBrush x:Key="Label.Register.Foreground" Color="#ef5ba2" />
+    <SolidColorBrush x:Key="Button.Login.Background" Color="#5d7899" />
+</ResourceDictionary>

@@ -1,0 +1,215 @@
+﻿<Window
+    x:Class="ZAPC.Client.Views.PacketEpdListOfFiles.PacketEpdListOfFilesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:chargeListOfFiles="clr-namespace:ZAPC.Client.ViewModels.ChargeListOfFiles"
+    xmlns:controllers="clr-namespace:ZAPC.Client.Controllers"
+    xmlns:controls="clr-namespace:ZAPC.Client.Controls"
+    xmlns:converters="clr-namespace:ZAPC.Client.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fileloader="clr-namespace:ZAPC.Client.Essentials.FileLoaders;assembly=ZAPC.Client.Essentials"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:listoffiles="clr-namespace:ZAPC.Client.ViewModels.ListOfFiles"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:ZAPC.Client.Resources"
+    xmlns:showFileInfo="clr-namespace:ZAPC.Client.Controllers.ShowFileInfo"
+    xmlns:statuses="clr-namespace:ZAPC.Documents.Statuses;assembly=ZAPC.Documents"
+    xmlns:viewModels="clr-namespace:ZAPC.Client.ViewModels"
+    xmlns:vm="clr-namespace:ZAPC.Client.ViewModels.OtherDocsListOfFile"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    Title="Список файлов"
+    Width="800"
+    Height="600"
+    MinWidth="680"
+    MinHeight="500"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <viewModels:TabControlContainerViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <ObjectDataProvider x:Key="ListOfFilesOfPacketEpdViewModel" ObjectType="listoffiles:ListOfFilesOfPacketEpdViewModel">
+            <ObjectDataProvider.ConstructorParameters>
+                <fileloader:PacketEpdFileLoader />
+                <showFileInfo:ShowUfebsFileInfoController />
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="ChargeListOfFilesViewModel" ObjectType="chargeListOfFiles:ChargeListOfFilesViewModel">
+            <ObjectDataProvider.ConstructorParameters>
+                <fileloader:ChargeFileLoader />
+                <showFileInfo:ChargeFileController />
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="OtherDocsListOfFilesViewModel" ObjectType="vm:OtherDocsListOfFilesViewModel">
+            <ObjectDataProvider.ConstructorParameters>
+                <fileloader:OtherDocumentFileLoader />
+                <controllers:ShowDocInfoController />
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <converters:BoolOrMultiValueConverter x:Key="BoolOrMultiValueConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TabControl
+            Name="TabControl"
+            Grid.Row="1"
+            Margin="7,0,7,7"
+            BorderBrush="#D6E0E5"
+            BorderThickness="1">
+            <TabItem Header="{x:Static resources:TabResources.PackagesTabCaption}">
+                <Grid DataContext="{StaticResource ListOfFilesOfPacketEpdViewModel}">
+                    <controls:ListOfFiles />
+                    <xctk:BusyIndicator BusyContent="{Binding BusyContent}">
+                        <xctk:BusyIndicator.IsBusy>
+                            <MultiBinding Converter="{StaticResource BoolOrMultiValueConverter}">
+                                <Binding Path="SignFilesAsyncCommand.IsExecuting" />
+                                <Binding Path="SaveFilesAsyncCommand.IsExecuting" />
+                                <Binding Path="RemoveFilesAsyncCommand.IsExecuting" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.SaveAs}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Open}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Check}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Sign}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Remove}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Edit}" />
+                                <Binding Path="IsFirstLoad" />
+                            </MultiBinding>
+                        </xctk:BusyIndicator.IsBusy>
+                    </xctk:BusyIndicator>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{x:Static resources:TabResources.ChargesTabCaption}">
+                <Grid DataContext="{StaticResource ChargeListOfFilesViewModel}">
+                    <controls:ChargeInfoGrid />
+                    <xctk:BusyIndicator BusyContent="{Binding BusyContent}">
+                        <xctk:BusyIndicator.IsBusy>
+                            <MultiBinding Converter="{StaticResource BoolOrMultiValueConverter}">
+                                <Binding Path="SignFilesAsyncCommand.IsExecuting" />
+                                <Binding Path="SaveFilesAsyncCommand.IsExecuting" />
+                                <Binding Path="RemoveFilesAsyncCommand.IsExecuting" />
+                                <Binding Path="OpenFileByFileNameCommand.IsExecuting" />
+                                <Binding Path="OpenFileByObjectCommand.IsExecuting" />
+                                <Binding Path="IsFirstLoad" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.SaveAs}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Open}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Check}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Sign}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Remove}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Edit}" />
+                            </MultiBinding>
+                        </xctk:BusyIndicator.IsBusy>
+                    </xctk:BusyIndicator>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{x:Static resources:TabResources.OtherDocsTabCaprion}">
+                <Grid DataContext="{StaticResource OtherDocsListOfFilesViewModel}">
+                    <controls:OtherDocumentsGrid />
+                    <xctk:BusyIndicator BusyContent="{Binding BusyContent}">
+                        <xctk:BusyIndicator.IsBusy>
+                            <MultiBinding Converter="{StaticResource BoolOrMultiValueConverter}">
+                                <Binding Path="SignFilesAsyncCommand.IsExecuting" />
+                                <Binding Path="SaveFilesAsyncCommand.IsExecuting" />
+                                <Binding Path="RemoveFilesAsyncCommand.IsExecuting" />
+                                <Binding Path="OpenFileByFileNameCommand.IsExecuting" />
+                                <Binding Path="OpenFileByObjectCommand.IsExecuting" />
+                                <Binding Path="IsFirstLoad" />
+
+                                <Binding Path="CreateEdDoc.CreateEd202CommandAsync.IsExecuting" />
+                                <Binding Path="CreateEdDoc.CreateEd203CommandAsync.IsExecuting" />
+                                <Binding Path="CreateEdDoc.CreateEd204CommandAsync.IsExecuting" />
+                                <Binding Path="CreateEdDoc.CreateEd210CommandAsync.IsExecuting" />
+                                <Binding Path="CreateEdDoc.CreateEd301CommandAsync.IsExecuting" />
+                                <Binding Path="CreateEdDoc.CreateEd421CommandAsync.IsExecuting" />
+                                <Binding Path="CreateEdDoc.CreateEd499CommandAsync.IsExecuting" />
+                                <Binding Path="CreateEdDoc.CreateEd999CommandAsync.IsExecuting" />
+
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.SaveAs}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Open}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Check}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Sign}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Remove}" />
+                                <Binding
+                                    Mode="OneWay"
+                                    Path="Command.IsExecuting"
+                                    Source="{x:Static statuses:Action.Edit}" />
+                            </MultiBinding>
+                        </xctk:BusyIndicator.IsBusy>
+                    </xctk:BusyIndicator>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TempTab">
+                <Grid>
+                    <Button Command="{Binding TestCommand}" Content="TestShit" />
+                </Grid>
+            </TabItem>
+            <!--  маленькое такое fucking fuck системы, чтобы под выделенной вкладкой не дорисовывалась линия (при заданной высоте вкладки)  -->
+            <TabItem
+                Width="0"
+                Height="28"
+                Margin="0"
+                Visibility="Hidden" />
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=OnTabChangedCommand}" CommandParameter="{Binding ElementName=TabControl}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding Path=TabControlLoadedCommand}" CommandParameter="{Binding ElementName=TabControl, Path=SelectedContent}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TabControl>
+    </Grid>
+</Window>

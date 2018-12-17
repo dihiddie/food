@@ -1,0 +1,39 @@
+﻿<Window
+    x:Class="ZAPC.Client.Views.ChargeListOfFiles.ChargeListOfFilesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:chargeListOfFiles="clr-namespace:ZAPC.Client.ViewModels.ChargeListOfFiles"
+    xmlns:controls="clr-namespace:ZAPC.Client.Controls"
+    xmlns:controlvm="clr-namespace:ZAPC.Client.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:filecontoller="clr-namespace:ZAPC.Client.Controllers.ShowFileInfo"
+    xmlns:fileloader="clr-namespace:ZAPC.Client.Essentials.FileLoaders;assembly=ZAPC.Client.Essentials"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:ZAPC.Client.Resources"
+    Title="Список платежек"
+    Width="800"
+    Height="400"
+    MinWidth="400"
+    MinHeight="300"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <controlvm:ControlViewModel x:Key="ControlViewModel" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <controls:ChargeInfoGrid Grid.Row="0" />
+        <Button
+            Grid.Row="1"
+            Width="70"
+            Height="30"
+            Margin="5,5,5,5"
+            HorizontalAlignment="Right"
+            Command="{Binding CloseWindowCommand}"
+            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            Content="{x:Static resources:SharedResources.CloseCaption}"
+            DataContext="{StaticResource ControlViewModel}" />
+    </Grid>
+</Window>

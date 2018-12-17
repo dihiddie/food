@@ -1,0 +1,187 @@
+﻿<UserControl
+    x:Class="ZAPC.Client.Controls.ChargeInfoGrid"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:advancedDataGridControl="clr-namespace:AdvancedDataGridControl;assembly=AdvancedDataGridControl"
+    xmlns:chargeListOfFiles="clr-namespace:ZAPC.Client.ViewModels.ChargeListOfFiles"
+    xmlns:checkboxable="clr-namespace:CheckboxableComboboxControl.Checkboxable;assembly=CheckboxableComboboxControl"
+    xmlns:checkboxablecontrol="clr-namespace:CheckboxableComboboxControl;assembly=CheckboxableComboboxControl"
+    xmlns:columnHeaderData="clr-namespace:AdvancedDataGridControl.ColumnHeaderData;assembly=AdvancedDataGridControl"
+    xmlns:columnTemplates="clr-namespace:AdvancedDataGridControl.ColumnTemplates;assembly=AdvancedDataGridControl"
+    xmlns:converters="clr-namespace:ZAPC.Client.Essentials.Converters;assembly=ZAPC.Client.Essentials"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:doc="clr-namespace:ZAPC.Documents.Statuses;assembly=ZAPC.Documents"
+    xmlns:fileLoaders="clr-namespace:ZAPC.Client.Essentials.FileLoaders;assembly=ZAPC.Client.Essentials"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:ZAPC.Client.Resources"
+    xmlns:showFileInfo="clr-namespace:ZAPC.Client.Controllers.ShowFileInfo"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:IntToBoolConverter x:Key="IntToBoolConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="0.7*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Margin="6,0,7,0"
+                VerticalAlignment="Center"
+                Text="{x:Static resources:SharedResources.DisplayStatusesCaption}" />
+            <checkboxablecontrol:CheckboxableCombobox
+                Grid.Column="1"
+                Height="27"
+                HorizontalAlignment="Stretch"
+                Command="{Binding SelectedItemsChangedCommand}">
+                <checkboxable:CheckboxableComboboxItem DataContext="{Binding Source={x:Static doc:Statuses.New}}" />
+                <checkboxable:CheckboxableComboboxItem DataContext="{Binding Source={x:Static doc:Statuses.Checked}}" />
+                <checkboxable:CheckboxableComboboxItem DataContext="{Binding Source={x:Static doc:Statuses.Signed}}" />
+                <checkboxable:CheckboxableComboboxItem DataContext="{Binding Source={x:Static doc:Statuses.Processed}}" />
+                <checkboxable:CheckboxableComboboxItem DataContext="{Binding Source={x:Static doc:Statuses.Sended}}" />
+                <checkboxable:CheckboxableComboboxItem DataContext="{Binding Source={x:Static doc:Statuses.Accepted}}" />
+                <checkboxable:CheckboxableComboboxItem DataContext="{Binding Source={x:Static doc:Statuses.Rejected}}" />
+                <checkboxable:CheckboxableComboboxItem DataContext="{Binding Source={x:Static doc:Statuses.Deleted}}" />
+            </checkboxablecontrol:CheckboxableCombobox>
+            <StackPanel
+                Grid.Column="2"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button Command="{Binding CreateChargeCommandAsync}" Content="{x:Static resources:SharedResources.CreateCaption}" />
+                <StackPanel IsEnabled="{Binding ElementName=AdvancedDataGrid, Path=SelectedItems.Count, Converter={StaticResource IntToBoolConverter}}" Orientation="Horizontal">
+                    <Button
+                        HorizontalAlignment="Right"
+                        Command="{Binding SaveFilesAsyncCommand}"
+                        CommandParameter="{Binding ElementName=AdvancedDataGrid, Path=SelectedItems}"
+                        Content="{x:Static resources:SharedResources.SaveCaption}" />
+                    <Button
+                        HorizontalAlignment="Right"
+                        Command="{Binding RemoveFilesAsyncCommand}"
+                        CommandParameter="{Binding ElementName=AdvancedDataGrid}"
+                        Content="{x:Static resources:SharedResources.DeleteCaption}" />
+                    <Button
+                        Command="{Binding SignFilesAsyncCommand}"
+                        CommandParameter="{Binding ElementName=AdvancedDataGrid, Path=SelectedItems}"
+                        Content="{x:Static resources:SharedResources.SignCaption}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <advancedDataGridControl:AdvancedDataGrid
+            Name="AdvancedDataGrid"
+            Grid.Row="1"
+            CancelFilteringCommand="{Binding CancelFilteringCommand}"
+            CellBasedOnStyle="{StaticResource DataGridCellStatusColorStyle}"
+            CommandDataContext="{Binding}"
+            DataGridItemsSource="{Binding Files}"
+            FilterCommand="{Binding FilterAsyncCommand}"
+            FilterTask="{Binding FilterTask}"
+            RowStyle="{StaticResource DataGridRowStyle}"
+            Style="{StaticResource AdvancedDataGridStyle}">
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    Command="{Binding OpenFileByObjectCommand}"
+                    CommandParameter="{Binding ElementName=AdvancedDataGrid, Path=SelectedItem.DataContext}"
+                    MouseAction="LeftDoubleClick" />
+            </DataGrid.InputBindings>
+            <advancedDataGridControl:AdvancedDataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </advancedDataGridControl:AdvancedDataGrid.ColumnHeaderStyle>
+            <DataGrid.Resources>
+                <columnHeaderData:HeaderData x:Key="HeaderData" Data="{Binding}" />
+            </DataGrid.Resources>
+            <advancedDataGridControl:AdvancedDataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding DataContext.FileName}" Header="Платежное поручение">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style BasedOn="{StaticResource DataGridCellTemplateTextBlockStyle}" TargetType="{x:Type TextBlock}" />
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DataContext.Amount}" Header="Сумма">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style BasedOn="{StaticResource DataGridCellTemplateTextBlockStyle}" TargetType="{x:Type TextBlock}" />
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <!--  Операционный день  -->
+                <columnTemplates:ChangeableHeaderTemplateColumn
+                    Name="OperDay"
+                    Width="*"
+                    ColumnChangedTo="Calendar"
+                    Header="{Binding Data.CalendarHeaderData, Source={StaticResource HeaderData}, Mode=TwoWay}">
+                    <columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource DataGridCellTemplateTextBlockStyle}" Text="{Binding DataContext.EdDate, StringFormat=dd.MM.yyyy}" />
+                        </DataTemplate>
+                    </columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                </columnTemplates:ChangeableHeaderTemplateColumn>
+                <columnTemplates:ChangeableHeaderTemplateColumn
+                    Width="*"
+                    ColumnChangedTo="LiveSearch"
+                    Header="{Binding Data.PayerAccountNumberHeaderData, Source={StaticResource HeaderData}, Mode=TwoWay}">
+                    <columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource DataGridCellTemplateTextBlockStyle}" Text="{Binding DataContext.Payer.AccountNumber}" />
+                        </DataTemplate>
+                    </columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                </columnTemplates:ChangeableHeaderTemplateColumn>
+                <columnTemplates:ChangeableHeaderTemplateColumn
+                    Width="*"
+                    ColumnChangedTo="LiveSearch"
+                    Header="{Binding Data.PayeeBicHeaderData, Source={StaticResource HeaderData}, Mode=TwoWay}">
+                    <columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource DataGridCellTemplateTextBlockStyle}" Text="{Binding DataContext.Payee.Bank.Bic}" />
+                        </DataTemplate>
+                    </columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                </columnTemplates:ChangeableHeaderTemplateColumn>
+                <columnTemplates:ChangeableHeaderTemplateColumn
+                    Width="*"
+                    ColumnChangedTo="LiveSearch"
+                    Header="{Binding Data.PayeeAccountNumberHeaderData, Source={StaticResource HeaderData}, Mode=TwoWay}">
+                    <columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource DataGridCellTemplateTextBlockStyle}" Text="{Binding DataContext.Payee.AccountNumber}" />
+                        </DataTemplate>
+                    </columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                </columnTemplates:ChangeableHeaderTemplateColumn>
+                <columnTemplates:ChangeableHeaderTemplateColumn
+                    Width="*"
+                    ColumnChangedTo="LiveSearch"
+                    Header="{Binding Data.CreatorFullNameHeaderData, Source={StaticResource HeaderData}, Mode=TwoWay}">
+                    <columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource DataGridCellTemplateTextBlockStyle}" Text="{Binding DataContext.CreatorFullName}" />
+                        </DataTemplate>
+                    </columnTemplates:ChangeableHeaderTemplateColumn.CellTemplate>
+                </columnTemplates:ChangeableHeaderTemplateColumn>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding DataContext.VerifierFullName}"
+                    Header="ФИО проверившего">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style BasedOn="{StaticResource DataGridCellTemplateTextBlockStyle}" TargetType="{x:Type TextBlock}" />
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding DataContext.Status.Name}"
+                    Header="Статус">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style BasedOn="{StaticResource DataGridCellTemplateTextBlockStyle}" TargetType="{x:Type TextBlock}" />
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </advancedDataGridControl:AdvancedDataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding SetDefaultPrefilterCommand}" CommandParameter="{Binding ElementName=AdvancedDataGrid}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </advancedDataGridControl:AdvancedDataGrid>
+    </Grid>
+</UserControl>
